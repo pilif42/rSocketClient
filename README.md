@@ -11,4 +11,5 @@ Or: mvn clean package spring-boot:run -DskipTests=true
 Once the app has started, you will get a shell:> prompt. Type: 
     - request-response to test in mode request-response, ie standard HTTP model.
     - fire-and-forget to test by sending a request but not waiting for a response.
+    - stream to stream data using the conventional ‘client-requests-a-server-stream’ approach. Note that it is also possible to implement the less common ‘server-requests-a-client-stream’ model.
 To finish off your testing, type: exit

@@ -85,7 +85,7 @@ public class RSocketShellClient {
                 .route("stream")
                 .data(new Message(CLIENT, STREAM))
                 .retrieveFlux(Message.class)
-                .subscribe(message -> log.info("Response: {} (Type 's' to stop.)", message));
+                .subscribe(message -> log.info("Response received: {} (Type 's' to stop.)", message));
     }
 
     @ShellMethod("Stream some settings to the server. Stream of responses will be printed.")
@@ -108,19 +108,16 @@ public class RSocketShellClient {
 
     @ShellMethod("Stops Streams or Channels.")
     public void s() {
-        if (null != disposable) {
+        if (disposable != null) {
             log.info("Stopping the incoming stream.");
             disposable.dispose();
             log.info("Stream stopped.");
         }
     }
-
-
 }
 
 @Slf4j
 class ClientHandler {
-
     @MessageMapping("client-status")
     public Flux<String> statusUpdate(String status) {
         log.info("Connection {}", status);
