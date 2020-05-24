@@ -75,7 +75,7 @@ public class RSocketShellClient {
                 .route("fire-and-forget")
                 .data(new Message(CLIENT, FIRE_AND_FORGET))
                 .send()
-                .block();
+                .block();   // Subscribes and waits for completion.
     }
 
     @ShellMethod("Send one request. Many responses (stream) will be printed.")
