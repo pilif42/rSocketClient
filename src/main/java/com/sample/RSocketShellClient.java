@@ -92,9 +92,9 @@ public class RSocketShellClient {
     public void channel() {
         log.info("\n\n***** Channel (bi-directional streams)\n***** Asking for a stream of messages.\n***** Type 's' to stop.\n\n");
 
-        Mono<Duration> setting1 = Mono.just(Duration.ofSeconds(1));
-        Mono<Duration> setting2 = Mono.just(Duration.ofSeconds(3)).delayElement(Duration.ofSeconds(5));
-        Mono<Duration> setting3 = Mono.just(Duration.ofSeconds(5)).delayElement(Duration.ofSeconds(15));
+        Mono<Duration> setting1 = Mono.just(Duration.ofSeconds(1)); // Emitted with no delay.
+        Mono<Duration> setting2 = Mono.just(Duration.ofSeconds(3)).delayElement(Duration.ofSeconds(5)); // Emitted after 5s.
+        Mono<Duration> setting3 = Mono.just(Duration.ofSeconds(5)).delayElement(Duration.ofSeconds(15));    // Emitted after 15s.
 
         Flux<Duration> settings = Flux.concat(setting1, setting2, setting3)
                 .doOnNext(d -> log.info("\nSending setting for a {}-second interval.\n", d.getSeconds()));
